@@ -1,10 +1,33 @@
 ---
-title: "mp4"
-author: "Christina Hung"
+title: "Mini-Project 4"
+author: "Harriet Brookes-Gray, Ellen Dong, Christina Hung"
 date: "April 27, 2019"
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message = FALSE, warning = FALSE}
+#Opening the libraries, getting scidb data
+
+library(tidyverse)
+library(RMySQL)
+db <- dbConnect(MySQL(), 
+                host = "scidb.smith.edu", 
+                user = "mth292", 
+                password = "RememberPi", 
+                dbname = "citibike")
+knitr::opts_chunk$set(connection = db, max.print = 20)
+```
+
+```{sql connection = db}
+#SQL Query to Join the Tables
+
+SELECT duration, stat_time, stop_time, start_station_id, end_station_id
+FROM trips 
+LEFT JOIN station_months ON trips.start_station_id = station_months.name
 ```
