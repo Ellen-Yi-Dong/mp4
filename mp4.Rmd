@@ -27,8 +27,9 @@ knitr::opts_chunk$set(connection = db, max.print = 20)
 ```{sql connection = db}
 #SQL Query to Join the Tables
 
+EXPLAIN
 SELECT duration, start_time, stop_time, start_station_id, end_station_id
 FROM trips 
 LEFT JOIN station_months ON trips.start_station_id = station_months.name
-ORDER BY duration
+ORDER BY duration;
 ```
