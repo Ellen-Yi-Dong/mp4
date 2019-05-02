@@ -1,10 +1,11 @@
 ---
 title: "Mini-Project 4"
-author: "Harriet Brookes-Gray, Ellen Dong, Christina Hung"
+author: "by Harriet Brookes-Gray, Ellen Dong, Christina Hung"
 date: "April 27, 2019"
 output: 
   html_document:
     code_folding: hide
+    df_print: paged
 ---
 
 ```{r setup, include = FALSE}
@@ -27,9 +28,9 @@ knitr::opts_chunk$set(connection = db, max.print = 20)
 ```{sql connection = db}
 #SQL Query to Join the Tables
 
-EXPLAIN
 SELECT duration, start_time, stop_time, start_station_id, end_station_id
 FROM trips 
 LEFT JOIN station_months ON trips.start_station_id = station_months.name
-ORDER BY duration;
+WHERE start_time > "2017-01-01 06:00:00" AND stop_time < "2017-01-01 10:00:00"
+ORDER BY start_time;
 ```
